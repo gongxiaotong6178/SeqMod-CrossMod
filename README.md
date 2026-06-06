@@ -1,19 +1,148 @@
-# SeqMod-CrossMod
-# general protein dataset
-# DNA_TR637/DNA_VA160/DNA_TE129/RNA_TR1032/RNA_VA258/RNA_TE117
-Explanation of dataset
-Line 1: >protein ID
-Line 2: protein sequence (1-letter amino acid encoding)
-Line 3: annotations of nucleic acid-binding regions (NB), where '1' denotes a NB, '0' denotes a non-NB
-# IDR protein dataset
-# IDR-TR552/IDR-VA227/IDR-TE242
-Explanation of dataset
-Line 1: >protein ID
-Line 2: protein sequence (1-letter amino acid encoding)
-Line 3: annotations of intrinsic disorder regions (IDR), where '1' denotes a IDR, '0' denotes a non-IDR
-Line 4: annotations of disordered Protein-binding regions (PB), where '1' denotes a PB, '0' denotes a non-PB
-Line 5: annotations of disordered Nucleic acid-binding regions (NB), where '1' denotes a NB, '0' denotes a non-NB
-Line 6: annotations of disordered Lipid-binding regions (LB), where '1' denotes a LB, '0' denotes a non-LB
-Line 7: annotations of disordered Ion-binding regions (IB), where '1' denotes a IB, '0' denotes a non-IB
-Line 8: annotations of disordered Small molecule-binding regions (SB), where '1' denotes a SB, '0' denotes a non-SB
-Line 9: annotations of disordered flexible linkers (DFL), where '1' denotes a DFL, '0' denotes a non-DFL
+# SeqMod and CrossMod for Protein–Nucleic Acid Binding Site Prediction
+
+## Overview
+
+This repository contains the implementation of two deep learning frameworks for protein–nucleic acid binding site prediction:
+
+* **SeqMod**: a sequence-based prediction framework using protein language model embeddings.
+* **CrossMod**: a multimodal prediction framework integrating sequence and structure-aware protein representations.
+
+Both frameworks support **DNA-binding** and **RNA-binding** residue prediction tasks.
+
+---
+
+## Repository Structure
+
+├── SeqMod/
+│   ├── DNA_dataset.py
+│   ├── DNA_model.py
+│   ├── RNA_dataset.py
+│   └── RNA_model.py
+│
+├── CrossMod/
+│   ├── DNA_dataset.py
+│   ├── DNA_model.py
+│   ├── RNA_dataset.py
+│   └── RNA_model.py
+│
+└── README.md
+
+### SeqMod
+
+SeqMod is a sequence-driven framework based on protein language model embeddings.
+
+* DNA_SeqMod_dataset.py
+
+  * Data loading for the DNA-binding prediction task.
+  * Loads ESM2 embeddings and residue-level labels.
+
+* DNA_SeqMod_model.py
+
+  * SeqMod model implementation for DNA-binding site prediction.
+
+* RNA_SeqMod_dataset.py
+
+  * Data loading for the RNA-binding prediction task.
+  * Loads ESM2 embeddings and residue-level labels.
+
+* RNA_SeqMod_model.py
+
+  * SeqMod model implementation for RNA-binding site prediction.
+
+---
+
+### CrossMod
+
+CrossMod is a multimodal framework that combines sequence and structure-aware protein representations.
+
+* DNA_CrossMod_dataset.py
+
+  * Data loading for DNA-binding prediction.
+  * Loads both ESM2 and SaProt embeddings.
+
+* DNA_CrossMod_model.py
+
+  * CrossMod model implementation for DNA-binding site prediction.
+
+* RNA_CrossMod_dataset.py
+
+  * Data loading for RNA-binding prediction.
+  * Loads both ESM2 and SaProt embeddings.
+
+* RNA_CrossMod_model.py
+
+  * CrossMod model implementation for RNA-binding site prediction.
+
+---
+
+## Input Features
+
+### SeqMod
+
+* ESM2 protein embeddings.
+* Residue-level binding annotations.
+
+### CrossMod
+
+* ESM2 protein embeddings.
+* SaProt structure-aware embeddings.
+* Residue-level binding annotations.
+
+Embedding files should be stored in `.pkl` format, where each file contains:
+
+{
+    "seq_embeding": embedding_matrix
+}
+
+
+---
+
+## Data Preparation
+
+The dataset loaders require:
+
+* Protein IDs;
+* Protein sequences;
+* Residue-level binding annotations.
+
+FASTA files should follow the format:
+
+```
+>Protein_ID
+SEQUENCE
+ANNOTATION
+```
+
+where the annotation string consists of residue-level binary labels.
+
+---
+
+## Usage
+
+Before running the scripts, specify the locations of:
+
+* embedding directories;
+* FASTA files.
+
+The dataset loaders are designed to be easily adapted to custom datasets by modifying the input paths.
+
+---
+
+## Requirements
+
+* Python 3.8
+* PyTorch
+* NumPy
+* Pandas
+
+---
+
+## Citation
+
+If you use this code in your research, please cite our corresponding publication.
+
+---
+
+## Contact
+
+For questions regarding the implementation, please contact the corresponding author.
