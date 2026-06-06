@@ -1,1 +1,1 @@
-# SeqMod-StrMod
+# SeqMod-CrossMod
