@@ -1,6 +1,6 @@
 # SeqMod-CrossMod
 # general protein dataset
-# DNA_TR637/DNA-VA160/DNA_TE129/RNA_TR1032/RNA_VA258/RNA_TE117
+# DNA_TR637/DNA_VA160/DNA_TE129/RNA_TR1032/RNA_VA258/RNA_TE117
 Explanation of dataset
 Line 1: >protein ID
 Line 2: protein sequence (1-letter amino acid encoding)
